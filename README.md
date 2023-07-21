@@ -1,2 +1,2 @@
 # printf
-team project "printf" done by Chiba Ismail, Mohamed Lahsir
+team project "printf" done by Chiba Ismail, Mohamed Lahsiri
