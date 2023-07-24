@@ -1,63 +1,49 @@
 #include "main.h"
 
 /**
- * _printf - Printf function
- * @format: format.
- * Return: number of characters printed.
+ * _printf - prints anything
+ * @format: the format string
+ *
+ * Return: number of bytes printed
  */
-
 int _printf(const char *format, ...)
 {
+	int count = 0;/*counter count number of characters printe*/
 	va_list args;
-	int count = 0, len = 0;
-	char *str;
-
-	if (!format)
-		return (-1);
+	char *c, *start;
+	params_t params = PARAMS_INIT;/*init by zero al elements*/
 
 	va_start(args, format);
 
-	while (*format != '\0')
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (c = (char *)format; *c; c++)
 	{
-		if (*format == '%')
+		init_params(&params, args);
+		if (*c != '%')
 		{
-			format++;
-
-			if (*format == 'c')
-			{
-				write(1, format, 1);
-				count++;
-			}
-			if (*format == 's')
-			{
-				str = va_arg(args, char *);
-				while (*str != '\0')
-				{
-					len++
-				}
-				write(1, str, len);
-				count += len;
-			}
-			if (*format == '%')
-			{
-				write(1, format, 2);
-				count += 2;
-			}
-
+			count += _putchar(*c);
+			continue;
 		}
+		start = c;
+		c++;
+		while (get_flags(c, &params))/*check flags*/
+		{
+			c++;/*next char*/
+		}
+		c = get_width(c, &params, args);
+		c = get_precision(c, &params, args);
+		if (get_modifier(c, &params))
+			c++;
+		if (!get_specifier(c, &params))
+			count += printf_from_to(start, c,
+			params.l_modifier || params.h_modifier ? c - 1 : 0);
+		else
+			count += get_print_func(c, args, &params);
 	}
+	_putchar(BUF_FLUSH);
 	va_end(args);
 	return (count);
 }
-/**
- * print_buffer - Prints the buffer contenent
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
- *void print_buffer(char buffer[], int *buff_ind)
- *{
- *	if (*buff_ind > 0)
- *		write(1, &buffer[0], *buff_ind);
- *
- *	*buff_ind = 0;
- *}
- */
