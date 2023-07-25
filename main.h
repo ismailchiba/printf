@@ -113,4 +113,9 @@ int print_number(char *str, params_t *params);
 int print_number_right_shift(char *str, params_t *params);
 int print_number_left_shift(char *str, params_t *params);
 
+/*simple_printers.c*/
+int print_from_to(char *start, char *stop, char *except);
+int print_rev(va_list ap, params_t *params);
+int print_rot13(va_list ap, params_t *params);
+
 #endif
