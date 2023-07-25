@@ -30,6 +30,7 @@ int print_rev(va_list ap, params_t *params)
 	int len, sum = 0;
 	char *str = va_arg(ap, char *);
 	(void)params;
+
 	if (str)
 	{
 		for (len = 0; *str; str++)
