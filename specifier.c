@@ -9,7 +9,7 @@
 
 int (*get_specifier(char *s))(va_list ap, params_t *params)
 {
-	specifier_t specifier[] = {
+	specifier_t specifiers[] = {
 		{"c", print_char},
 		{"d", print_int},
 		{"i", print_int},
@@ -19,7 +19,7 @@ int (*get_specifier(char *s))(va_list ap, params_t *params)
 		{"o", print_octal},
 		{"u", print_unsigned},
 		{"x", print_hex},
-		{"x", print_HEX},
+		{"X", print_HEX},
 		{"p", print_address},
 		{"S", print_S},
 		{"r", print_rev},
@@ -28,11 +28,11 @@ int (*get_specifier(char *s))(va_list ap, params_t *params)
 	};
 	int i = 0;
 
-	while (specifier[i].specifier)
+	while (specifiers[i].specifier)
 	{
-		if (*s == specifier[i].specifier[0])
+		if (*s == specifiers[i].specifier[0])
 		{
-			return (specifier[i].f);
+			return (specifiers[i].f);
 		}
 		i++;
 	}
@@ -47,6 +47,7 @@ int (*get_specifier(char *s))(va_list ap, params_t *params)
  *
  * Return: the number of bytes printed
  */
+
 int get_print_func(char *s, va_list ap, params_t *params)
 {
 	int (*f)(va_list, params_t *) = get_specifier(s);
@@ -63,6 +64,7 @@ int get_print_func(char *s, va_list ap, params_t *params)
  *
  * Return: if flag exist
  */
+
 
 int get_flag(char *s, params_t *params)
 {
@@ -89,6 +91,7 @@ int get_flag(char *s, params_t *params)
 	return (i);
 }
 
+
 /**
  * get_modifier - finds the modifier func
  * @s: the format string
@@ -102,12 +105,12 @@ int get_modifier(char *s, params_t *params)
 
 	switch (*s)
 	{
-		case 'h':
-			i = params->h_modifier = 1;
-			break;
-		case 'l':
-			i = params->l_modifier = 1;
-			break;
+	case 'h':
+		i = params->h_modifier = 1;
+		break;
+	case 'l':
+		i = params->l_modifier = 1;
+		break;
 	}
 	return (i);
 }
