@@ -14,7 +14,7 @@ int print_from_to(char *start, char *stop, char *except)
 	{
 		if (start != except)
 			sum += putchar(*start);
-		Istart++;
+		start++;
 	}
 	return (sum);
 }
@@ -54,7 +54,7 @@ int print_rot13(va_list ap, params_t *params)
 	int i, index;
 	int count = 0;
 	char arr[] = "NOPQRSTUVWXYZABCDEFGHIJKLM	nopqrstuvwxyzabcdefghijklm";
-	char *a = va_arg(ap, char * *);
+	char *a = va_arg(ap, char *);
 	(void)params;
 
 	i = 0;
