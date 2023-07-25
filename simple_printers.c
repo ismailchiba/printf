@@ -64,8 +64,8 @@ int print_rot13(va_list ap, params_t *params)
 	{
 		a = strdup(a);
 		if (a == NULL)
-			return count;
-        }
+			return (count);
+	}
 	i = 0;
 	index = 0;
 	while (a[i])
