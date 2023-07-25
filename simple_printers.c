@@ -60,12 +60,6 @@ int print_rot13(va_list ap, params_t *params)
 
 	if (a == NULL)
 		return (count);
-	if (params->l_modifier)
-	{
-		a = strdup(a);
-		if (a == NULL)
-			return (count);
-	}
 	i = 0;
 	index = 0;
 	while (a[i])
