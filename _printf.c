@@ -9,9 +9,9 @@
 int _printf(const char *format, ...)
 {
 	int sum = 0;
-	va_list ap;
+	va_list ap;/*args*/
 	char *p, *start;
-	params_t params = PARAMS_INIT;
+	params_t params = PARAMS_INIT;/*init the params*/
 
 	va_start(ap, format);
 
@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 			sum += _putchar(*p);
 			continue;
 		}
-		start = p;
+		start = p;/*the beginning */
 		p++;
 		while (get_flag(p, &params))
 		{
